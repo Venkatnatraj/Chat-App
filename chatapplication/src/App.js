@@ -1,15 +1,9 @@
-/* eslint no-console: ["error", { allow: ["error"] }] */
-
 import React from 'react';
 import Chatkit from '@pusher/chatkit';
-
-// Components
 import MessageList from './components/MessageList';
 import SendMessageForm from './components/SendMessageForm';
 import RoomList from './components/RoomList';
 import NewRoomForm from './components/NewRoomForm';
-
-// Libraries
 import './styles.css';
 import { tokenUrl, instanceLocator, userName } from './config';
 
