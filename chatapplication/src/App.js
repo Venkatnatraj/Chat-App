@@ -36,54 +36,54 @@ class App extends React.Component {
       })
     });
 
-  //   chatManager.connect()
-  //     .then(currentUser => {
-  //       this.currentUser = currentUser;
-  //       this.getRooms();
-  //       // this.subscribeToRoom();
-  //     }).catch(err => console.error('Error on connecting: ', err));
-  // }
-  // getRooms() {
-  //   this.currentUser.getJoinableRooms()
-  //     .then(joinableRooms => {
-  //       this.setState({
-  //         joinableRooms,
-  //         joinedRooms: this.currentUser.rooms
-  //       });
-  //     }).catch(err => console.error('Error on fetching joinable rooms: ', err));
-  // }
-  // subscribeToRoom(roomId) {
-  //   this.setState({
-  //     messages: []
-  //   });
-  //   this.currentUser.subscribeToRoom({
-  //     roomId,
-  //     hooks: {
-  //       onNewMessage: message => {
-  //         this.setState({
-  //           messages: [...this.state.messages, message]
-  //         });
-  //       }
-  //     }
-  //   }).then(room => {
-  //     this.setState({
-  //       roomId: room.id
-  //     });
-  //     this.getRooms();
-  //   }).catch(err => console.error('Error on subscribing to rooms: ', err));
-  // }
-  // sendMessage (text) {
-  //   this.currentUser.sendMessage({
-  //     text,
-  //     roomId: this.state.roomId
-  //   });
-  // }
-  // createRoom(name) {
-  //   this.currentUser.createRoom({
-  //     name
-  //   }).then(room => this.subscribeToRoom(room.id))
-  //     .catch(err => console.error('Error on creating new room: ', err));
-  // }
+    chatManager.connect()
+      .then(currentUser => {
+        this.currentUser = currentUser;
+        this.getRooms();
+        // this.subscribeToRoom();
+      }).catch(err => console.error('Error on connecting: ', err));
+  }
+  getRooms() {
+    this.currentUser.getJoinableRooms()
+      .then(joinableRooms => {
+        this.setState({
+          joinableRooms,
+          joinedRooms: this.currentUser.rooms
+        });
+      }).catch(err => console.error('Error on fetching joinable rooms: ', err));
+  }
+  subscribeToRoom(roomId) {
+    this.setState({
+      messages: []
+    });
+    this.currentUser.subscribeToRoom({
+      roomId,
+      hooks: {
+        onNewMessage: message => {
+          this.setState({
+            messages: [...this.state.messages, message]
+          });
+        }
+      }
+    }).then(room => {
+      this.setState({
+        roomId: room.id
+      });
+      this.getRooms();
+    }).catch(err => console.error('Error on subscribing to rooms: ', err));
+  }
+  sendMessage (text) {
+    this.currentUser.sendMessage({
+      text,
+      roomId: this.state.roomId
+    });
+  }
+  createRoom(name) {
+    this.currentUser.createRoom({
+      name
+    }).then(room => this.subscribeToRoom(room.id))
+      .catch(err => console.error('Error on creating new room: ', err));
+  }
   render() {
     const rooms = [...this.state.joinableRooms, ...this.state.joinedRooms];
     return (
